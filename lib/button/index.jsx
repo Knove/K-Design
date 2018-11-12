@@ -1,12 +1,11 @@
-'use strict';
 import React from 'react';
-import style from './style/button.js';
+import { styleMain } from './style/button.js';
 
 class Button extends React.Component {
   render() {
     const props = this.props;
 
-    const styleSum =  Object.assign({}, style, props.style);
+    const styleSum =  Object.assign({}, styleMain, props.style);
 
     const config = {
     };

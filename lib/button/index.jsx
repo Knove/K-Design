@@ -1,21 +1,43 @@
-import React from 'react';
-import { styleMain } from './style/button.js';
+import React from "react";
+import { styleMain, styleMouseOver } from "./style/button.js";
 
 class Button extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      styleSum: Object.assign({}, styleMain, this.props.style),
+      styleBasic: Object.assign({}, styleMain, this.props.style)
+    };
+    this.onMouseOut = this.onMouseOut.bind(this);
+    this.onMouseOver = this.onMouseOver.bind(this);
+  }
+
+  componentWillMount() {}
+
+  onMouseOut() {
+    this.setState({
+      styleSum: this.state.styleBasic
+    });
+  }
+
+  onMouseOver() {
+    this.setState({
+      styleSum: Object.assign({}, styleMain, styleMouseOver)
+    });
+  }
+
   render() {
-    const props = this.props;
-
-    const styleSum =  Object.assign({}, styleMain, props.style);
-
     const config = {
+      onMouseOver: this.onMouseOver,
+      onMouseOut: this.onMouseOut
     };
 
+    Object.assign(config, this.props);
 
-    Object.assign(config, props);
-    config.style = styleSum;
-    
+    config.style = this.state.styleSum;
+
     console.log(config);
-    return <div {...config}>{props.children}</div>;
+    return <div {...config}>{this.props.children}</div>;
   }
 }
 

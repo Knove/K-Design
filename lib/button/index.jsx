@@ -1,35 +1,73 @@
 import React from "react";
-import { styleMain, styleMouseOver } from "./style/button.js";
+import { styleMain, onHandler, kType } from "./style/button.js";
 
 class Button extends React.Component {
   constructor(props) {
     super(props);
+    const styleBasic = Object.assign(
+      {},
+      styleMain,
+      props.style,
+      kType[props.ktype]
+    );
+
     this.state = {
-      styleSum: Object.assign({}, styleMain, this.props.style),
-      styleBasic: Object.assign({}, styleMain, this.props.style)
+      styleSum: styleBasic,
+      styleBasic,
+      kType: props.ktype ? props.ktype : "default",
+      fixed: false
     };
     this.onMouseOut = this.onMouseOut.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
 
-  componentWillMount() {}
+  componentDidMount() {}
 
   onMouseOut() {
-    this.setState({
-      styleSum: this.state.styleBasic
-    });
+    if (!this.state.fixed)
+      this.setState({
+        styleSum: this.state.styleBasic
+      });
   }
 
   onMouseOver() {
+    if (!this.state.fixed)
+      this.setState({
+        styleSum: Object.assign(
+          {},
+          this.state.styleSum,
+          onHandler[this.state.kType].styleMouseOver
+        )
+      });
+  }
+
+  onFocus() {
     this.setState({
-      styleSum: Object.assign({}, styleMain, styleMouseOver)
+      styleSum: Object.assign(
+        {},
+        this.state.styleSum,
+        onHandler[this.state.kType].onFocus
+      ),
+      fixed: true
+    });
+  }
+
+  onBlur() {
+    this.setState({
+      styleSum: this.state.styleBasic,
+      fixed: false
     });
   }
 
   render() {
     const config = {
+      tabIndex: "0",
       onMouseOver: this.onMouseOver,
-      onMouseOut: this.onMouseOut
+      onMouseOut: this.onMouseOut,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur
     };
 
     Object.assign(config, this.props);

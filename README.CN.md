@@ -3,6 +3,7 @@
 
 [React](http://facebook.github.io/react/) 组件设计 
 
+[![npm package](https://img.shields.io/npm/v/kdesign.svg?style=flat-square)](https://www.npmjs.org/package/kdesign)
 
 </div>
 

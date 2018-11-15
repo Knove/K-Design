@@ -1,7 +1,14 @@
 import React from "react";
-import { styleMain, onHandler, kType } from "./style/button.js";
+import {
+  styleMain,
+  styleTitle,
+  styleBody,
+  onHandler,
+  styleExtra,
+  kType
+} from "./style/card.js";
 
-class Button extends React.Component {
+class Card extends React.Component {
   constructor(props) {
     super(props);
     const styleBasic = Object.assign(
@@ -19,8 +26,6 @@ class Button extends React.Component {
     };
     this.onMouseOut = this.onMouseOut.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
   }
 
   componentDidMount() {}
@@ -43,40 +48,38 @@ class Button extends React.Component {
       });
   }
 
-  onFocus() {
-    this.setState({
-      styleSum: Object.assign(
-        {},
-        this.state.styleSum,
-        onHandler[this.state.kType].onFocus
-      ),
-      fixed: true
-    });
-  }
-
-  onBlur() {
-    this.setState({
-      styleSum: this.state.styleBasic,
-      fixed: false
-    });
-  }
-
   render() {
     const config = {
-      tabIndex: "0",
       onMouseOver: this.onMouseOver,
-      onMouseOut: this.onMouseOut,
-      onFocus: this.onFocus,
-      onBlur: this.onBlur
+      onMouseOut: this.onMouseOut
     };
 
     Object.assign(config, this.props);
 
     config.style = this.state.styleSum;
-
     console.log(config);
-    return <button {...config}>{this.props.children}</button>;
+    return (
+      <div {...config}>
+        {this.props.title ? (
+          <div style={styleTitle} title="">
+            {this.props.title}
+            {this.props.extra ? (
+              <div style={styleExtra} title="">
+                {this.props.extra}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        ) : (
+          ""
+        )}
+        <div style={styleBody} title="">
+          {this.props.children}
+        </div>
+      </div>
+    );
   }
 }
 
-module.exports = Button;
+module.exports = Card;

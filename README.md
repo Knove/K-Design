@@ -12,7 +12,7 @@ English | [简体中文](./README.CN.md)
 ## Why use K-Design?
 
 - An enterprise-class UI design system for ```complex``` web applications.
-- Min ```size```, Min ```dependencies```, Min ** anything **.
+- Min ```size```, Min ```dependencies```, Min **anything**.
 
 ## Installation
 
@@ -26,7 +26,7 @@ yarn add kdesign
 
 ## Usage
 
-Here is a quick example to get you started, **it's all you need**:
+Here is a quick example to get you started:
 
 ```jsx
 import { Button } from 'kdesign';

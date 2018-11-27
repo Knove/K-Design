@@ -3,7 +3,7 @@
 
 [React](http://facebook.github.io/react/) components Design 
 
-Minimum  Fast  Demand-Loading
+Minimum  Fast  Lazy-Load
 
 [![npm package](https://img.shields.io/npm/v/kdesign.svg?style=flat-square)](https://www.npmjs.org/package/kdesign)
 
